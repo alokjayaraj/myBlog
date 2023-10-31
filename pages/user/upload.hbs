@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Blog upload</title>
+
+    <style>
+        .container{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #blogForm{
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <h1>Blog Content Upload</h1>
+        <form action="/createBlog?id={{userDetails._id}}" method="post" id="blogForm" enctype="multipart/form-data">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="content">Content</label>
+            <textarea name="content" id="content" rows="7" required></textarea> 
+
+            <label for="image">Image:</label>
+            <input type="file" name="images" id="imageInput" multiple accept="image/*" onchange="showImages()" required>
+
+            <div id="imagePreview"></div>
+
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+    {{!-- <script src="/adminScript.js"></script> --}}
+</body>
+</html>
