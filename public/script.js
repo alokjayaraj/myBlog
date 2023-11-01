@@ -14,9 +14,14 @@ fetch('/register', {
         "Content-Type":"application/json"
     },
     body:JSON.stringify(formData)
-}).then((data) =>{
+}).then((response) => response.json()).then((data) =>{
+    if(data.signup){
     window.location.href = "/"
     console.log(data);
+    }
+    else{
+        alert("User already exist,,,please try again")
+    }
 })
 
 }

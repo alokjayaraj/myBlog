@@ -22,18 +22,29 @@ const showSignUp = ((req,res) =>{
     res.render('user/signUp.hbs')
 })
 
-const doSignUp = ((req,res) =>{
+const doSignUp = async(req,res) =>{
     console.log(req.body);
-    USER({
-        email: req.body.email2,
-        name: req.body.name,
-        password: req.body.password2
-    }).save().then((res) =>{
-        res.json({signup:true})
-    }).catch(() =>{
-        res.json({signup:false})
-    })
-})
+    try{
+        const UserExist = await USER.findOne({email:req.body.email})
+        if(UserExist)
+        {
+            return res.json({signup:false})
+        }else{
+            USER({
+                email: req.body.email,
+                name: req.body.name,
+                password: req.body.password
+            }).save().then((resp) =>{
+                res.json({signup:true});
+            }).catch(() =>{
+                res.json({signup:false})
+            });
+        } 
+    }catch(error){
+        res.json({error:"something went wrong"})
+    }
+    
+};
 
 const doLogin = ((req,res) =>{
     // console.log(req.body)
