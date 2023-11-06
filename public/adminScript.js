@@ -32,3 +32,16 @@ function deletePost(postId){
         }
     })
 }
+
+function logout(){
+    localStorage.clear()
+    sessionStorage.clear()
+    location.assign('/logout')
+}
+
+let headers = document.querySelectorAll('header');
+headers.forEach(header => {
+window.addEventListener('scroll', () =>{
+    header.classList.toggle('shadow', window.scrollY > 50);
+});
+});
